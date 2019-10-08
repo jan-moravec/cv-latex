@@ -69,14 +69,16 @@
 	\iflanguage{czech}{#1}{}
 }
 
+\definecolor{myblue}{RGB}{104, 126, 154}
+
 %%%% Titles customization
 \titleformat{\section}
-[hang]							% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\Large\scshape\raggedright}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
-{}								% specify sectioning label. \faGraduationCap
-{0em}                        	% is the horizontal separation between label and title body and it must be a length and not be empty. 
-{}                           	% is code preceding the title body. 
-[\titlerule]                 	% is code following the title body. 
+[hang]										% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\Large\scshape\raggedright\color{myblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
+{}											% specify sectioning label. \faGraduationCap
+{0em}                        				% is the horizontal separation between label and title body and it must be a length and not be empty. 
+{}                           				% is code preceding the title body. 
+[\titlerule]                 				% is code following the title body. 
 
 \titlespacing{\section}
 {0em}					% increases the left margin. 
@@ -85,7 +87,7 @@
 
 \titleformat{\subsection}
 [hang]
-{\large\scshape\raggedright\bfseries}
+{\large\scshape\raggedright\bfseries\color{myblue}}
 {}
 {0em}
 {}
