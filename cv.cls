@@ -37,6 +37,7 @@
 \RequirePackage{enumitem}
 \RequirePackage{fontawesome}
 \RequirePackage{amsmath}
+\RequirePackage{titlesec}
 \RequirePackage{ifthen}
 
 \pagestyle{empty}
@@ -60,6 +61,32 @@
 	\ClassError{cv}{Language was not set!}{}
 }
 
+%%%% Define language filter command
+\newcommand{\english}[1]{
+	\iflanguage{english}{#1}{}
+}
+\newcommand{\czech}[1]{
+	\iflanguage{czech}{#1}{}
+}
+
+
+\def\Vhrulefill{\leavevmode\leaders\hrule height .7ex depth \dimexpr 0.4pt-0.7ex \hfill \kern0pt}
+%%%% Titles
+\titleformat{\section}         % Customise the \section command 
+{\Large\scshape\raggedright} % Make the \section headers large (\Large), small capitals (\scshape) and left aligned (\raggedright)
+{\faGraduationCap}
+{2em}                        % Can be used to give a prefix to all sections, like 'Section ...'
+{}                           % Can be used to insert code before the heading
+[\titlerule]                 % Inserts a horizontal line after the heading
+% \Vhrulefill  \titlerule
+
+\titlespacing{\section}{2em}{2em}{2em}
+
+\titleformat{\subsection}
+{\large\scshape\raggedright}
+{}{0em}
+{}
+
 %%%% Define timeitem command
 \newcommand{\timeitem}[3]{
 	\noindent
@@ -68,60 +95,47 @@
 	\end{tabular}\\[1ex]
 }
 
-\def\english#1{
-	\iflanguage{english}{#1}{}
+\newcommand{\datedsection}[2]{%
+	\section[#1]{#1 \hfill #2}%
 }
-\def\czech#1{
-	\iflanguage{czech}{#1}{}
+\newcommand{\datedsubsection}[2]{%
+	\subsection[#1]{#1 \hfill #2}%
 }
 
-%%%% DefineSection command
-
-%%%% Define Sections
-%\DefineSection{education}
-
-%%%% Define icons
-\def\authorIcon{\faMale}
-\def\phoneIcon{\faPhone}
-\def\dateofbirthIcon{\faCalendar}
-\def\placeofbirthIcon{\faMapO}
-\def\statusIcon{\faHeart}
-\def\emailIcon{\faEnvelopeO}
-\def\addressIcon{\faHome}
-\def\wwwIcon{\faGlobe}
+%%%%% Define Section command
+%\makeatletter
 %
-\def\personalDataIcon{\faInfoCircle}
-\def\educationIcon{\faGraduationCap}
-\def\publicationsIcon{\faFileTextO}
-\def\conferencesIcon{\faGroup}
-\def\scholarshipsIcon{\faTrophy}
-\def\skillsIcon{\faKeyboardO}
-\def\hobbiesIcon{\faThumbsOUp}
-\def\experienceIcon{\faBriefcase}
-\def\certificatesIcon{\faWpforms}
-\def\projectsIcon{\faLightbulbO}
-\def\internshipsIcon{\faWrench}
-
-%%%% Define English 
-\def\authorName{Name}
-\def\phoneName{Phone}
-\def\dateofbirthName{Date of birth}
-\def\placeofbirthName{Place of birth}
-\def\statusName{Status}
-\def\emailName{E-mail}
-\def\addressName{Address}
-\def\wwwName{WWW}
+%\def\@Sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth \let \@svsec \@empty \else \refstepcounter {#1}\protected@edef \@svsec {\@seccntformat {#1}\relax }\fi \@tempskipa #5\relax \ifdim \@tempskipa >\z@ \begingroup #6{\@hangfrom {\hskip #3\relax \@svsec }\interlinepenalty \@M #8 \Vhrulefill\@@par }\endgroup \csname #1mark\endcsname {#7}
+%	\addcontentsline {toc}{#1}{\ifnum #2>\c@secnumdepth \else \protect \numberline 
+%		{\csname the#1\endcsname }\fi #7}\else \def \@svsechd {#6{\hskip #3\relax \@svsec #8}\csname #1mark\endcsname {#7}\addcontentsline {toc}{#1}{\ifnum #2>\c@secnumdepth \else \protect \numberline {\csname the#1\endcsname }\fi #7}}\fi \@xsect {#5}}
 %
-\def\personalDataName{Personal data}
-\def\educationName{Education}
-\def\publicationsName{Publications}
-\def\conferencesName{Conferences}
-\def\scholarshipsName{Scholarships, grants}
-\def\skillsName{Skills}
-\def\hobbiesName{Hobbies}
-\def\experienceName{Experience}
-\def\certificatesName{Certificates}
-\def\projectsName{Projects}
-\def\internshipsName{Internships}
+%\def\@startSection#1#2#3#4#5#6{\if@noskipsec \leavevmode \fi \par \@tempskipa #4\relax \@afterindenttrue \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa \@afterindentfalse \fi \if@nobreak \everypar {}\else \addpenalty \@secpenalty \addvspace \@tempskipa
+%	\fi \@ifstar {\@ssect {#3}{#4}{#5}{#6}}{\@dblarg {\@Sect {#1}{#2}{#3}{#4}{#5}{#6}}}}
+%
+%\def\Section{\@startSection {section}{1}{\z@ }%
+%	{2ex}%
+%	{2.3ex \@plus .2ex}%
+%	{\normalfont \Large \sffamily}%
+%}
+%
+%\def\Vhrulefill{\leavevmode\leaders\hrule height .7ex depth \dimexpr 0.4pt-0.7ex \hfill \kern0pt}
+%
+%%\def\secbox#1{\makebox[0pt][r]{\fcolorbox{blue!60!black}{blue!60!black}{\color{white} #1}}}
+%%\def\Icon#1{\def\@seccntformat##1{\secbox{#1}\,}}
+%%\def\Icon#1{\def\@seccntformat##1{\llap{\colorbox{black}{\makebox[1.3em][c]{\textcolor{white}{#1}}}\hspace{0.5em}}}}
+%\def\Icon#1{\def\@seccntformat##1{\llap{{\makebox[1.5em][c]{{#1}}\hspace{0.5em}}}}}
+%
+%
+%\def\section{\@startsection{section}{1}{\z@}%
+%	{2ex}%-3.5ex \@plus -1ex \@minus -.2ex}%
+%	{2.3ex \@plus.2ex}%
+%	{\normalfont \Large \sffamily}}
+%
+%\def\subsection{\@startsection{subsection}{2}{\z@}%
+%	{1ex}%-3.5ex \@plus -1ex \@minus -.2ex}%
+%	{-2.3ex \@plus.2ex}%
+%	{\normalfont \normalsize \sffamily}}
+%
+%\makeatother              
 
 \endinput
