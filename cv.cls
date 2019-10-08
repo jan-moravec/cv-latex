@@ -31,7 +31,7 @@
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[a4paper, bindingoffset=0.2in, left=1in, right=1in, top=1in, bottom=1in, footskip=.25in]{geometry}
+\RequirePackage[a4paper, bindingoffset=0.2in, left=0.5in, right=0.5in, top=0.5in, bottom=0.5in, footskip=.25in]{geometry}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{enumitem}
@@ -69,73 +69,43 @@
 	\iflanguage{czech}{#1}{}
 }
 
+%%%% Titles customization
+\titleformat{\section}
+[hang]							% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\Large\scshape\raggedright}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
+{}								% specify sectioning label. \faGraduationCap
+{0em}                        	% is the horizontal separation between label and title body and it must be a length and not be empty. 
+{}                           	% is code preceding the title body. 
+[\titlerule]                 	% is code following the title body. 
 
-\def\Vhrulefill{\leavevmode\leaders\hrule height .7ex depth \dimexpr 0.4pt-0.7ex \hfill \kern0pt}
-%%%% Titles
-\titleformat{\section}         % Customise the \section command 
-{\Large\scshape\raggedright} % Make the \section headers large (\Large), small capitals (\scshape) and left aligned (\raggedright)
-{\faGraduationCap}
-{2em}                        % Can be used to give a prefix to all sections, like 'Section ...'
-{}                           % Can be used to insert code before the heading
-[\titlerule]                 % Inserts a horizontal line after the heading
-% \Vhrulefill  \titlerule
-
-\titlespacing{\section}{2em}{2em}{2em}
+\titlespacing{\section}
+{0em}					% increases the left margin. 
+{1em}					% is the vertical space before the title. 
+{2em}					% is the separation between title and non-sectioning text. 
 
 \titleformat{\subsection}
-{\large\scshape\raggedright}
-{}{0em}
+[hang]
+{\large\scshape\raggedright\bfseries}
+{}
+{0em}
 {}
 
-%%%% Define timeitem command
-\newcommand{\timeitem}[3]{
-	\noindent
-	\begin{tabular}{@{}p{0.8\textwidth}@{}p{0.2\textwidth}@{}}
-		\raggedright {\bfseries  #2}\\ #1  & \raggedleft #3 
-	\end{tabular}\\[1ex]
-}
+\titlespacing{\subsection}
+{0em}
+{1em}
+{0.2em}
 
+%%%% Define timeitem command
 \newcommand{\datedsection}[2]{%
 	\section[#1]{#1 \hfill #2}%
 }
 \newcommand{\datedsubsection}[2]{%
 	\subsection[#1]{#1 \hfill #2}%
-}
+}  
 
-%%%%% Define Section command
-%\makeatletter
-%
-%\def\@Sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth \let \@svsec \@empty \else \refstepcounter {#1}\protected@edef \@svsec {\@seccntformat {#1}\relax }\fi \@tempskipa #5\relax \ifdim \@tempskipa >\z@ \begingroup #6{\@hangfrom {\hskip #3\relax \@svsec }\interlinepenalty \@M #8 \Vhrulefill\@@par }\endgroup \csname #1mark\endcsname {#7}
-%	\addcontentsline {toc}{#1}{\ifnum #2>\c@secnumdepth \else \protect \numberline 
-%		{\csname the#1\endcsname }\fi #7}\else \def \@svsechd {#6{\hskip #3\relax \@svsec #8}\csname #1mark\endcsname {#7}\addcontentsline {toc}{#1}{\ifnum #2>\c@secnumdepth \else \protect \numberline {\csname the#1\endcsname }\fi #7}}\fi \@xsect {#5}}
-%
-%\def\@startSection#1#2#3#4#5#6{\if@noskipsec \leavevmode \fi \par \@tempskipa #4\relax \@afterindenttrue \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa \@afterindentfalse \fi \if@nobreak \everypar {}\else \addpenalty \@secpenalty \addvspace \@tempskipa
-%	\fi \@ifstar {\@ssect {#3}{#4}{#5}{#6}}{\@dblarg {\@Sect {#1}{#2}{#3}{#4}{#5}{#6}}}}
-%
-%\def\Section{\@startSection {section}{1}{\z@ }%
-%	{2ex}%
-%	{2.3ex \@plus .2ex}%
-%	{\normalfont \Large \sffamily}%
-%}
-%
-%\def\Vhrulefill{\leavevmode\leaders\hrule height .7ex depth \dimexpr 0.4pt-0.7ex \hfill \kern0pt}
-%
-%%\def\secbox#1{\makebox[0pt][r]{\fcolorbox{blue!60!black}{blue!60!black}{\color{white} #1}}}
-%%\def\Icon#1{\def\@seccntformat##1{\secbox{#1}\,}}
-%%\def\Icon#1{\def\@seccntformat##1{\llap{\colorbox{black}{\makebox[1.3em][c]{\textcolor{white}{#1}}}\hspace{0.5em}}}}
-%\def\Icon#1{\def\@seccntformat##1{\llap{{\makebox[1.5em][c]{{#1}}\hspace{0.5em}}}}}
-%
-%
-%\def\section{\@startsection{section}{1}{\z@}%
-%	{2ex}%-3.5ex \@plus -1ex \@minus -.2ex}%
-%	{2.3ex \@plus.2ex}%
-%	{\normalfont \Large \sffamily}}
-%
-%\def\subsection{\@startsection{subsection}{2}{\z@}%
-%	{1ex}%-3.5ex \@plus -1ex \@minus -.2ex}%
-%	{-2.3ex \@plus.2ex}%
-%	{\normalfont \normalsize \sffamily}}
-%
-%\makeatother              
+%%%% No paragraphs, itemize settings
+\setlength{\parindent}{0cm}     
+\setlist[itemize,1]{leftmargin=*}
+\setlist{nolistsep}
 
 \endinput
