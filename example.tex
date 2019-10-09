@@ -9,12 +9,29 @@
 %\usepackage{tgadventor}
 %\usepackage{fontspec}
 %\setmainfont{Corbel}
+\usepackage[export]{adjustbox}
 
 \begin{document}
 	
-\centerline{\Huge{\textbf{John Doe}}}
+\leftline{\Huge{\textbf{John Doe}}}
 
 \cvsection{Personal Data}
+
+\begin{minipage}{0.7\textwidth}
+	\begin{tabular}[t]{@{}ll}
+		Sentence 1 & Translation 1 \\
+		Longer Sentenc & Longer Translation \\
+		Longer Sentence & Longer Translation \\
+		Longer Sentence & Longer Translation \\
+		Longer Sentenc & Longer Translation \\
+		Longer Sentenc & Longer Translation \\
+		Longer Sentenc & Longer Translation \\
+		Longer Sentenc & Longer Translation \\\\
+	\end{tabular}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+	\includegraphics[valign=T, width=0.75\linewidth, right]{picture.png}
+\end{minipage}
 		
 \cvsection{Education}
 

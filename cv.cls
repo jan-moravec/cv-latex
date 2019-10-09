@@ -31,7 +31,7 @@
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[a4paper, bindingoffset=0.2in, left=1.0in, right=1.0in, top=0.5in, bottom=0.5in, footskip=.25in]{geometry}
+\RequirePackage[a4paper, margin=1.0in]{geometry}
 \RequirePackage{changepage}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
@@ -39,6 +39,8 @@
 \RequirePackage{amsmath}
 \RequirePackage{titlesec}
 \RequirePackage{ifthen}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
 
 \pagestyle{empty}
 
@@ -125,5 +127,13 @@
 \setlength{\parindent}{0cm}     
 \setlist[itemize,1]{leftmargin=*}
 \setlist{nolistsep}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Overleaf}
+\lhead{Guides and tutorials}
+\rfoot{\thepage \hspace{1pt} / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
 \endinput
