@@ -31,11 +31,11 @@
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[a4paper, bindingoffset=0.2in, left=0.5in, right=0.5in, top=0.5in, bottom=0.5in, footskip=.25in]{geometry}
+\RequirePackage[a4paper, bindingoffset=0.2in, left=1.0in, right=1.0in, top=0.5in, bottom=0.5in, footskip=.25in]{geometry}
+\RequirePackage{changepage}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{enumitem}
-\RequirePackage{fontawesome}
 \RequirePackage{amsmath}
 \RequirePackage{titlesec}
 \RequirePackage{ifthen}
@@ -62,32 +62,48 @@
 }
 
 %%%% Define language filter command
-\newcommand{\english}[1]{
+\newcommand{\cveng}[1]{
 	\iflanguage{english}{#1}{}
 }
-\newcommand{\czech}[1]{
+\newcommand{\cvcze}[1]{
 	\iflanguage{czech}{#1}{}
 }
 
-\definecolor{myblue}{RGB}{104, 126, 154}
-
 %%%% Titles customization
+\usepackage{xhfill}
+\definecolor{cvblue}{RGB}{54, 74, 120}
+\newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]}
+
+\newcommand{\cvsection}[1]{
+	\titleformat{\section}
+	[hang]
+	{\Large\scshape\raggedright\color{cvblue}}
+	{}
+	{0em}
+	{\ruleafter}
+	[]
+	
+	\begin{adjustwidth}{-0.5in}{-0.5in}
+	\section{#1}
+	\end{adjustwidth}
+}
+
 \titleformat{\section}
 [hang]										% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\Large\scshape\raggedright\color{myblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
+{\Large\scshape\raggedright\color{cvblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
 {}											% specify sectioning label. \faGraduationCap
 {0em}                        				% is the horizontal separation between label and title body and it must be a length and not be empty. 
 {}                           				% is code preceding the title body. 
-[\titlerule]                 				% is code following the title body. 
+[\titlerule]                 				% is code following the title body. \titlerule
 
 \titlespacing{\section}
 {0em}					% increases the left margin. 
 {1em}					% is the vertical space before the title. 
-{2em}					% is the separation between title and non-sectioning text. 
+{0em}					% is the separation between title and non-sectioning text. 
 
 \titleformat{\subsection}
 [hang]
-{\large\scshape\raggedright\bfseries\color{myblue}}
+{\large\scshape\raggedright\bfseries\color{cvblue}}
 {}
 {0em}
 {}
