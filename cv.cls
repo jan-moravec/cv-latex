@@ -38,11 +38,22 @@
 \RequirePackage{enumitem}
 \RequirePackage{amsmath}
 \RequirePackage{titlesec}
-\RequirePackage{ifthen}
+\RequirePackage[fixed]{fontawesome5}
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
+\RequirePackage{hyperref}
+\RequirePackage{xhfill}
+\RequirePackage{ifthen}
 
 \pagestyle{empty}
+\definecolor{cvblue}{RGB}{54, 74, 120}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=black,      
+	urlcolor=black,
+}
+%\urlstyle{same}
 
 %%%% Check if language was set
 \newboolean{language_set}   
@@ -64,22 +75,95 @@
 }
 
 %%%% Define language filter command
-\newcommand{\cveng}[1]{
+\newcommand{\cveng}[1]{%
 	\iflanguage{english}{#1}{}
 }
-\newcommand{\cvcze}[1]{
+\newcommand{\cvcze}[1]{%
 	\iflanguage{czech}{#1}{}
 }
 
-%%%% Titles customization
-\usepackage{xhfill}
-\definecolor{cvblue}{RGB}{54, 74, 120}
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]}
 
-\newcommand{\cvsection}[1]{
+%%%% Contact information
+\newcommand{\cvname}[1]{%
+	\def\cvnamevalue{#1} 
+}
+\newcommand{\cvimage}[1]{%
+	\def\cvimagevalue{#1} 
+}
+\newcommand{\cvphone}[1]{%
+	\def\cvphonevalue{#1} 
+}
+\newcommand{\cvemail}[1]{%
+	\def\cvemailvalue{#1} 
+}
+\newcommand{\cvaddress}[1]{%
+	\def\cvaddressvalue{#1} 
+}
+\newcommand{\cvdateofbirth}[1]{%
+	\def\cvdateofbirthvalue{#1} 
+}
+\newcommand{\cvwebpage}[1]{%
+	\def\cvwebpagevalue{#1} 
+}
+\newcommand{\cvgithub}[1]{%
+	\def\cvgithubvalue{#1} 
+}
+
+\newcommand{\cvgeneratecontact} {%
+	\begin{minipage}{0.65\textwidth}
+%		\ifthenelse{\isundefined{\cvnamevalue}}{
+%			\ClassError{cv}{Set name!}{}
+%		}{
+%			%\begin{adjustwidth}{-0.5in}{-0.5in}
+%			%	\huge{\textbf{\textcolor{cvblue}{\cvnamevalue}}}
+%			%\end{adjustwidth}
+%			%\leftline{\huge{\textbf{\textcolor{cvblue}{\cvnamevalue}}}}
+%			\medskip
+%		}
+		\cvsection{Personal Data}
+		
+		\begin{tabular}[t]{@{} p{1em} p{8em} l}
+			\ifthenelse{\isundefined{\cvnamevalue}}{
+				\ClassError{cv}{Set name!}{}
+			}{
+				\faAddressCard 	& \textbf{Name:} 	& \textbf{\cvnamevalue} \\
+			}
+			\ifthenelse{\isundefined{\cvphonevalue}}{}{%
+				\faPhone* 		& Phone: 			& \cvphonevalue \\
+			}%
+			\ifthenelse{\isundefined{\cvemailvalue}}{}{%
+				\faEnvelope 	& Email: 			& \href{mailto:\cvemailvalue}{\nolinkurl{\cvemailvalue}} \\
+			}%
+			\ifthenelse{\isundefined{\cvaddressvalue}}{}{%
+				\faHome 		& Address: 			& \cvaddressvalue \\
+			}%
+			\ifthenelse{\isundefined{\cvdateofbirthvalue}}{}{%
+				\faCalendar 	& Date of birth: 	& \cvdateofbirthvalue \\
+			}%
+			\ifthenelse{\isundefined{\cvwebpagevalue}}{}{%
+				\faGlobe 		& Web page: 		& \url{\cvwebpagevalue} \\
+			}%
+			\ifthenelse{\isundefined{\cvgithubvalue}}{}{%
+				\faGithub 		& GitHub: 			& \url{\cvgithubvalue} \\
+			}%
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.35\textwidth}
+		% Image
+		\ifthenelse{\isundefined{\cvnamevalue}}{}{
+			\begin{adjustwidth}{0.5in}{0.5in}
+				\includegraphics[valign=T, width=0.6\textwidth, right]{\cvimagevalue}
+			\end{adjustwidth}
+		}
+	\end{minipage}
+}
+
+%%%% Titles customization
+\newcommand{\cvsection}[1]{%
 	\titleformat{\section}
 	[hang]
-	{\Large\scshape\raggedright\color{cvblue}}
+	{\Large\scshape\color{cvblue}}
 	{}
 	{0em}
 	{\ruleafter}
@@ -92,7 +176,7 @@
 
 \titleformat{\section}
 [hang]										% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\Large\scshape\raggedright\color{cvblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
+{\Large\scshape\raggedright\bfseries\color{cvblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
 {}											% specify sectioning label. \faGraduationCap
 {0em}                        				% is the horizontal separation between label and title body and it must be a length and not be empty. 
 {}                           				% is code preceding the title body. 
@@ -105,7 +189,7 @@
 
 \titleformat{\subsection}
 [hang]
-{\large\scshape\raggedright\bfseries\color{cvblue}}
+{\bfseries}
 {}
 {0em}
 {}
@@ -124,14 +208,16 @@
 }  
 
 %%%% No paragraphs, itemize settings
-\setlength{\parindent}{0cm}     
+\setlength{\parindent}{0em}     
+\setlength{\parskip}{0em}
+\renewcommand{\baselinestretch}{1.2}
 \setlist[itemize,1]{leftmargin=*}
 \setlist{nolistsep}
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Overleaf}
-\lhead{Guides and tutorials}
+\rhead{\textcolor{gray}{\today}}
+\lhead{\textcolor{gray}{\cvnamevalue}}
 \rfoot{\thepage \hspace{1pt} / \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
