@@ -31,7 +31,7 @@
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[a4paper, margin=1.0in]{geometry}
+\RequirePackage[a4paper, margin=0.6in, includeheadfoot]{geometry}
 \RequirePackage{changepage}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
@@ -45,8 +45,8 @@
 \RequirePackage{xhfill}
 \RequirePackage{ifthen}
 
+%%%% Packages setting
 \pagestyle{empty}
-\definecolor{cvblue}{RGB}{54, 74, 120}
 \hypersetup{
 	colorlinks=true,
 	linkcolor=black,
@@ -82,7 +82,10 @@
 	\iflanguage{czech}{#1}{}
 }
 
-\newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]}
+%%%% Global defines
+\definecolor{cvblue}{RGB}{54, 74, 120}
+\def\cvheaderoffset{0.25in}
+\newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
 %%%% Contact information
 \newcommand{\cvname}[1]{%
@@ -110,57 +113,59 @@
 	\def\cvgithubvalue{#1} 
 }
 
+%%%% Generate contact information
 \newcommand{\cvgeneratecontact} {%
 	\begin{minipage}{0.65\textwidth}
-%		\ifthenelse{\isundefined{\cvnamevalue}}{
-%			\ClassError{cv}{Set name!}{}
-%		}{
-%			%\begin{adjustwidth}{-0.5in}{-0.5in}
-%			%	\huge{\textbf{\textcolor{cvblue}{\cvnamevalue}}}
-%			%\end{adjustwidth}
-%			%\leftline{\huge{\textbf{\textcolor{cvblue}{\cvnamevalue}}}}
-%			\medskip
-%		}
-		\cvsection{Personal Data}
+		\ifthenelse{\isundefined{\cvnamevalue}}{
+			\ClassError{cv}{Set name!}{}
+		}{	
+			\textcolor{cvblue}{\Huge{\cvnamevalue}}
+			\bigskip
+		}
+	
+		%\cvsection{Personal Data}
 		
-		\begin{tabular}[t]{@{} p{1em} p{8em} l}
-			\ifthenelse{\isundefined{\cvnamevalue}}{
-				\ClassError{cv}{Set name!}{}
-			}{
-				\faAddressCard 	& \textbf{Name:} 	& \textbf{\cvnamevalue} \\
-			}
-			\ifthenelse{\isundefined{\cvphonevalue}}{}{%
-				\faPhone* 		& Phone: 			& \cvphonevalue \\
-			}%
-			\ifthenelse{\isundefined{\cvemailvalue}}{}{%
-				\faEnvelope 	& Email: 			& \href{mailto:\cvemailvalue}{\nolinkurl{\cvemailvalue}} \\
-			}%
-			\ifthenelse{\isundefined{\cvaddressvalue}}{}{%
-				\faHome 		& Address: 			& \cvaddressvalue \\
-			}%
-			\ifthenelse{\isundefined{\cvdateofbirthvalue}}{}{%
-				\faCalendar 	& Date of birth: 	& \cvdateofbirthvalue \\
-			}%
-			\ifthenelse{\isundefined{\cvwebpagevalue}}{}{%
-				\faGlobe 		& Web page: 		& \url{\cvwebpagevalue} \\
-			}%
-			\ifthenelse{\isundefined{\cvgithubvalue}}{}{%
-				\faGithub 		& GitHub: 			& \url{\cvgithubvalue} \\
-			}%
-		\end{tabular}
+		\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
+			\begin{tabular}[t]{@{} p{1em} p{8em} l}
+				%\ifthenelse{\isundefined{\cvnamevalue}}{
+				%	\ClassError{cv}{Set name!}{}
+				%}{
+				%	\faAddressCard 	& \textbf{Name:} 	& \normalsize{\textbf{\cvnamevalue}} \\
+				%}
+				\ifthenelse{\isundefined{\cvphonevalue}}{}{%
+					\faPhone* 		& Phone: 			& \cvphonevalue \\
+				}%
+				\ifthenelse{\isundefined{\cvemailvalue}}{}{%
+					\faEnvelope 	& Email: 			& \href{mailto:\cvemailvalue}{\nolinkurl{\cvemailvalue}} \\
+				}%
+				\ifthenelse{\isundefined{\cvaddressvalue}}{}{%
+					\faHome 		& Address: 			& \cvaddressvalue \\
+				}%
+				\ifthenelse{\isundefined{\cvdateofbirthvalue}}{}{%
+					\faCalendar 	& Date of birth: 	& \cvdateofbirthvalue \\
+				}%
+				\ifthenelse{\isundefined{\cvwebpagevalue}}{}{%
+					\faGlobe 		& Web page: 		& \url{\cvwebpagevalue} \\
+				}%
+				\ifthenelse{\isundefined{\cvgithubvalue}}{}{%
+					\faGithub 		& GitHub: 			& \url{\cvgithubvalue} \\
+				}%
+				%\\
+			\end{tabular}
+		\end{adjustwidth}
 	\end{minipage}
 	\begin{minipage}{0.35\textwidth}
 		% Image
 		\ifthenelse{\isundefined{\cvnamevalue}}{}{
-			\begin{adjustwidth}{0.5in}{0.5in}
+			%\begin{adjustwidth}{-\cvheaderoffset}{-\cvheaderoffset}
 				\includegraphics[valign=T, width=0.6\textwidth, right]{\cvimagevalue}
-			\end{adjustwidth}
+			%\end{adjustwidth}
 		}
 	\end{minipage}
 }
 
 %%%% Titles customization
-\newcommand{\cvsection}[1]{%
+\newenvironment{cvsection}[1]{%
 	\titleformat{\section}
 	[hang]
 	{\Large\scshape\color{cvblue}}
@@ -169,8 +174,9 @@
 	{\ruleafter}
 	[]
 	
-	\begin{adjustwidth}{-0.5in}{-0.5in}
 	\section{#1}
+	\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
+}{
 	\end{adjustwidth}
 }
 
@@ -184,7 +190,7 @@
 
 \titlespacing{\section}
 {0em}					% increases the left margin. 
-{1em}					% is the vertical space before the title. 
+{1.5em}					% is the vertical space before the title. 
 {0em}					% is the separation between title and non-sectioning text. 
 
 \titleformat{\subsection}
@@ -199,13 +205,14 @@
 {1em}
 {0.2em}
 
-%%%% Define timeitem command
-\newcommand{\datedsection}[2]{%
-	\section[#1]{#1 \hfill #2}%
+%%%% Define dated subsection command
+\newcommand{\cvdatedsubsection}[2]{%
+	\subsection[#1]{#1 \hfill #2}
 }
-\newcommand{\datedsubsection}[2]{%
-	\subsection[#1]{#1 \hfill #2}%
-}  
+
+\newcommand{\cvsubsection}[1]{%
+	\subsection[#1]{#1}
+}
 
 %%%% No paragraphs, itemize settings
 \setlength{\parindent}{0em}     
@@ -214,6 +221,7 @@
 \setlist[itemize,1]{leftmargin=*}
 \setlist{nolistsep}
 
+%%%% Header and footer
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{\textcolor{gray}{\today}}
