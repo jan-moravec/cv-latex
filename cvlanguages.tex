@@ -1,0 +1,48 @@
+% LaTeX CV languages definitions
+%
+% Author: Jan Moravec (moravecjan@email.cz)
+% GitHub: https://github.com/jan-moravec/cv-latex
+
+%%%% Select one of following languages
+\DeclareOption{english}{
+	\PassOptionsToPackage{\CurrentOption}{babel}
+}
+\DeclareOption{czech}{
+	\PassOptionsToPackage{\CurrentOption}{babel}
+}
+
+% Fallback
+\DeclareOption*{
+	\ClassError{cv}{Unknown option '\CurrentOption'}{}
+}
+
+% Process given options
+\ProcessOptions\relax
+
+%%%% Check if language was set
+\newboolean{language_set}   
+\setboolean{language_set}{false}
+
+% Check all possible languages here
+\iflanguage{english}{
+	\setboolean{language_set}{true}
+}{}
+\iflanguage{czech}{
+	\setboolean{language_set}{true}
+
+}{}
+
+% Check result
+\ifthenelse{\boolean{language_set}}{
+	% OK, language was set
+}{
+	\ClassError{cv}{Language was not set!}{}
+}
+
+%%%% Define language filter command
+\newcommand{\cveng}[1]{%
+	\iflanguage{english}{#1}{}%
+}
+\newcommand{\cvcze}[1]{%
+	\iflanguage{czech}{#1}{}%
+}

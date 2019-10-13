@@ -1,4 +1,4 @@
-% LaTeX CV template class
+% LaTeX example for CV class
 %
 % Author: Jan Moravec (moravecjan@email.cz)
 % GitHub: https://github.com/jan-moravec/cv-latex
@@ -9,25 +9,44 @@
 %\usepackage{tgadventor}
 %\usepackage{fontspec}
 %\setmainfont{Corbel}
-\usepackage[export]{adjustbox}
 
 \begin{document}
-	
-%\leftline{\Huge{\textbf{John Doe}}}
 
-%\cvsection{Personal Data}
-
+% Contact data
 \cvname{Ing. John Doe}
-\cvphone{+420 123 456 789}
-\cvemail{john.doe@gmail.com}
-\cvaddress{4 Privet Drive, Little Whinging, Surrey}
-\cvdateofbirth{1/1/1990}
-\cvwebpage{https://www.google.com/}
+
+\cvphone[
+	\cveng{Phone}%
+	\cvcze{Mobil}%
+]{+420 123 456 789}
+
+\cvemail[
+	\cveng{Email}%
+	\cvcze{Email}%
+]{john.doe@gmail.com}
+
+\cvaddress[
+	\cveng{Address}%
+	\cvcze{Adresa}%
+]{4 Privet Drive, Little Whinging, Surrey}
+
+\cvdateofbirth[
+	\cveng{Date of birth}%
+	\cvcze{Datum narození}%
+]{1/1/1990}
+
+\cvwebpage[
+	\cveng{Web page}%
+	\cvcze{Webová stránka}%
+]{https://www.google.com/}
+
 \cvgithub{https://github.com/jan-moravec/}
+
 \cvimage{photo.jpg}
 
 \cvgeneratecontact
 
+% Sections
 \begin{cvsection}{Education}
 	\cvdatedsubsection{University of Nowhere}{2013 -- 2015}
 	\cveng{Middle-earth studies, bachelor studies, thesis: \textit{History of Hobbits}}

@@ -7,31 +7,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{cv}[2019/10/08 LaTeX CV template class]
 
-%%%% Custom package options
-% Select one of following languages
-\DeclareOption{english}{
-	\PassOptionsToPackage{\CurrentOption}{babel}
-}
-\DeclareOption{czech}{
-	\PassOptionsToPackage{\CurrentOption}{babel}
-}
-
-% Fallback
-\DeclareOption*{
-	\ClassError{cv}{Unknown option '\CurrentOption'}{}
-}
-
-% Process given options
-\ProcessOptions\relax
-
 %%%% Load base
 \LoadClass[a4paper]{article}
 
 %%%% Load additional packages and commands.
+\RequirePackage[a4paper, margin=0.6in, includeheadfoot]{geometry}
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[a4paper, margin=0.6in, includeheadfoot]{geometry}
 \RequirePackage{changepage}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
@@ -55,32 +38,8 @@
 }
 %\urlstyle{same}
 
-%%%% Check if language was set
-\newboolean{language_set}   
-\setboolean{language_set}{false}
-
-\iflanguage{english}{
-	\setboolean{language_set}{true}
-}{}
-
-\iflanguage{czech}{
-	\setboolean{language_set}{true}
-
-}{}
-
-\ifthenelse{\boolean{language_set}}{
-	% OK, language was set
-}{
-	\ClassError{cv}{Language was not set!}{}
-}
-
-%%%% Define language filter command
-\newcommand{\cveng}[1]{%
-	\iflanguage{english}{#1}{}
-}
-\newcommand{\cvcze}[1]{%
-	\iflanguage{czech}{#1}{}
-}
+%%%% Languages definition file
+\input{cvlanguages}
 
 %%%% Global defines
 \definecolor{cvblue}{RGB}{54, 74, 120}
@@ -88,29 +47,37 @@
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
 %%%% Contact information
-\newcommand{\cvname}[1]{%
-	\def\cvnamevalue{#1} 
+\newcommand{\cvname}[2][Name]{%
+	\def\cvnamelegend{#1}
+	\def\cvnamevalue{#2} 
 }
+\newcommand{\cvphone}[2][Phone]{%
+	\def\cvphonelegend{#1}
+	\def\cvphonevalue{#2} 
+}
+\newcommand{\cvemail}[2][Email]{%
+	\def\cvemaillegend{#1}
+	\def\cvemailvalue{#2} 
+}
+\newcommand{\cvaddress}[2][Address]{%
+	\def\cvaddresslegend{#1}
+	\def\cvaddressvalue{#2} 
+}
+\newcommand{\cvdateofbirth}[2][Date of birth]{%
+	\def\cvdateofbirthlegend{#1}
+	\def\cvdateofbirthvalue{#2} 
+}
+\newcommand{\cvwebpage}[2][Web page]{%
+	\def\cvwebpagelegend{#1}
+	\def\cvwebpagevalue{#2} 
+}
+\newcommand{\cvgithub}[2][GitHub]{%
+	\def\cvgithublegend{#1}
+	\def\cvgithubvalue{#2} 
+}
+% Image
 \newcommand{\cvimage}[1]{%
 	\def\cvimagevalue{#1} 
-}
-\newcommand{\cvphone}[1]{%
-	\def\cvphonevalue{#1} 
-}
-\newcommand{\cvemail}[1]{%
-	\def\cvemailvalue{#1} 
-}
-\newcommand{\cvaddress}[1]{%
-	\def\cvaddressvalue{#1} 
-}
-\newcommand{\cvdateofbirth}[1]{%
-	\def\cvdateofbirthvalue{#1} 
-}
-\newcommand{\cvwebpage}[1]{%
-	\def\cvwebpagevalue{#1} 
-}
-\newcommand{\cvgithub}[1]{%
-	\def\cvgithubvalue{#1} 
 }
 
 %%%% Generate contact information
@@ -133,22 +100,22 @@
 				%	\faAddressCard 	& \textbf{Name:} 	& \normalsize{\textbf{\cvnamevalue}} \\
 				%}
 				\ifthenelse{\isundefined{\cvphonevalue}}{}{%
-					\faPhone* 		& Phone: 			& \cvphonevalue \\
+					\faPhone* 		& \cvphonelegend: 		& \cvphonevalue \\
 				}%
 				\ifthenelse{\isundefined{\cvemailvalue}}{}{%
-					\faEnvelope 	& Email: 			& \href{mailto:\cvemailvalue}{\nolinkurl{\cvemailvalue}} \\
+					\faEnvelope 	& \cvemaillegend:		& \href{mailto:\cvemailvalue}{\nolinkurl{\cvemailvalue}} \\
 				}%
 				\ifthenelse{\isundefined{\cvaddressvalue}}{}{%
-					\faHome 		& Address: 			& \cvaddressvalue \\
+					\faHome 		& \cvaddresslegend:		& \cvaddressvalue \\
 				}%
 				\ifthenelse{\isundefined{\cvdateofbirthvalue}}{}{%
-					\faCalendar 	& Date of birth: 	& \cvdateofbirthvalue \\
+					\faCalendar 	& \cvdateofbirthlegend: & \cvdateofbirthvalue \\
 				}%
 				\ifthenelse{\isundefined{\cvwebpagevalue}}{}{%
-					\faGlobe 		& Web page: 		& \url{\cvwebpagevalue} \\
+					\faGlobe 		& \cvwebpagelegend: 	& \url{\cvwebpagevalue} \\
 				}%
 				\ifthenelse{\isundefined{\cvgithubvalue}}{}{%
-					\faGithub 		& GitHub: 			& \url{\cvgithubvalue} \\
+					\faGithub 		& \cvgithublegend: 		& \url{\cvgithubvalue} \\
 				}%
 				%\\
 			\end{tabular}
@@ -157,8 +124,10 @@
 	\begin{minipage}{0.35\textwidth}
 		% Image
 		\ifthenelse{\isundefined{\cvnamevalue}}{}{
-			%\begin{adjustwidth}{-\cvheaderoffset}{-\cvheaderoffset}
-				\includegraphics[valign=T, width=0.6\textwidth, right]{\cvimagevalue}
+			%\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
+			\begin{flushright}
+				\includegraphics[height=4cm]{\cvimagevalue} %[valign=T, width=3cm, right]
+			\end{flushright}	
 			%\end{adjustwidth}
 		}
 	\end{minipage}
