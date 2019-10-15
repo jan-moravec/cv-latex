@@ -11,7 +11,7 @@
 \LoadClass[a4paper]{article}
 
 %%%% Load additional packages and commands.
-\RequirePackage[a4paper, margin=0.6in, includeheadfoot]{geometry}
+\RequirePackage[a4paper, margin=0.75in, includeheadfoot]{geometry}
 \RequirePackage{babel}
 \RequirePackage[babel]{csquotes}
 \RequirePackage[utf8]{inputenc}
@@ -36,7 +36,7 @@
 	filecolor=black,      
 	urlcolor=black,
 }
-%\urlstyle{same}
+\urlstyle{same}
 
 %%%% Languages definition file
 \input{cvlanguages}
