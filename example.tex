@@ -15,27 +15,27 @@
 % Contact data
 \cvname{Ing. John Doe}
 
-\cvphone[
+\cvphone[%
 	\cveng{Phone}%
 	\cvcze{Mobil}%
 ]{+420 123 456 789}
 
-\cvemail[
+\cvemail[%
 	\cveng{Email}%
 	\cvcze{Email}%
 ]{john.doe@gmail.com}
 
-\cvaddress[
+\cvaddress[%
 	\cveng{Address}%
 	\cvcze{Adresa}%
 ]{4 Privet Drive, Little Whinging, Surrey}
 
-\cvdateofbirth[
+\cvdateofbirth[%
 	\cveng{Date of birth}%
 	\cvcze{Datum narození}%
 ]{1/1/1990}
 
-\cvwebpage[
+\cvwebpage[%
 	\cveng{Web page}%
 	\cvcze{Webová stránka}%
 ]{https://www.google.com/}
@@ -63,7 +63,7 @@
 	\cvcze{aiakdasjadnj: \textit{History of Hobbits}}
 \end{cvsection}
 
-\begin{cvsection}{Work}
+\begin{cvsection}{Work Experience}
 	\cvdatedsubsection{ABC Limited.}{2013 -- 2015}
 	\begin{itemize}
 		\item Developed new product
@@ -72,10 +72,12 @@
 	\end{itemize}
 \end{cvsection}
 
-\begin{cvsection}{Languages}
-	Czech\\
-	English\\
-	German\\
+\begin{cvsection}{Languages}	
+	\begin{tabular}[t]{@{} p{\cvvaluekeyoffset} l}
+		\textbullet \enskip Czech: 		& Some level \\
+		\textbullet \enskip English: 	& Some level \\
+		\textbullet \enskip German: 	& Some level \\
+	\end{tabular}
 \end{cvsection}
 
 \begin{cvsection}{IT Knowladge}

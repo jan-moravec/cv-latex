@@ -44,6 +44,7 @@
 %%%% Global defines
 \definecolor{cvblue}{RGB}{54, 74, 120}
 \def\cvheaderoffset{0.25in}
+\def\cvvaluekeyoffset{9em}
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
 %%%% Contact information
@@ -93,7 +94,7 @@
 		%\cvsection{Personal Data}
 		
 		\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
-			\begin{tabular}[t]{@{} p{1em} p{8em} l}
+			\begin{tabular}[t]{@{} p{3mm} p{\cvvaluekeyoffset-7mm} l}
 				%\ifthenelse{\isundefined{\cvnamevalue}}{
 				%	\ClassError{cv}{Set name!}{}
 				%}{
@@ -119,6 +120,9 @@
 				}%
 				%\\
 			\end{tabular}
+		%\begin{tabular}[t]{@{} p{\cvvaluekeyoffset} l}
+		%	test: 		& test \\
+		%\end{tabular}
 		\end{adjustwidth}
 	\end{minipage}
 	\begin{minipage}{0.35\textwidth}
@@ -160,7 +164,7 @@
 \titlespacing{\section}
 {0em}					% increases the left margin. 
 {1.5em}					% is the vertical space before the title. 
-{0em}					% is the separation between title and non-sectioning text. 
+{0.5em}					% is the separation between title and non-sectioning text. 
 
 \titleformat{\subsection}
 [hang]
@@ -171,7 +175,7 @@
 
 \titlespacing{\subsection}
 {0em}
-{1em}
+{0.5em}
 {0.2em}
 
 %%%% Define dated subsection command
