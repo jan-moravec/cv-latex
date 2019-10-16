@@ -3,15 +3,19 @@
 % Author: Jan Moravec (moravecjan@email.cz)
 % GitHub: https://github.com/jan-moravec/cv-latex
 
+%%%% Use CV document class
 \documentclass[english]{cv}
 
+%%%% Other packages
 % Download Lato font here: http://www.latofonts.com/lato-free-fonts/
 \usepackage{fontspec}
 \setmainfont{Lato} % Calibri Lato 
 
+
+%%%% Document body
 \begin{document}
 
-% Contact data
+%%%% Contact data
 \cvname{Ing. John Doe}
 
 \cvphone[%
@@ -43,18 +47,29 @@
 
 \cvimage{photo.jpg}
 
+% Generate the contact section
 \cvgeneratecontact
 
-% Sections
-\begin{cvsection}{Education}
-	\cvdatedsubsection{University of Nowhere}{2013 -- 2015}
+%%%% Sections - Education
+\begin{cvsection}{%
+	\cveng{Education}%
+	\cvcze{Vzdělání}%
+}
+	\cvdatedsubsection{%
+		\cveng{University of Nowhere}%
+		\cvcze{Univerzita Ničeho}%
+	}{2013 -- 2015}
+
 	\cveng{Middle-earth studies, bachelor studies, thesis: \textit{History of Hobbits}}
 	\cvcze{Studia o Śródziemiu, studia licencjackie, praca: \textit{Historia Hobbitów}}
 	
 	\cveng{Middle-earth studies, bachelor studies, thesis: \textit{History of Hobbits}}
 	\cvcze{aiakdasjadnj: \textit{History of Hobbits}}
 	
-	\cvdatedsubsection{University of Nowhere}{2013 -- 2015}
+	\cvdatedsubsection{%
+		\cveng{Secondary Grammar School of Nowhere}%
+		\cvcze{Gymnázium Ničeho}%
+	}{2005 -- 2013}
 	\cveng{Middle-earth studies, bachelor studies, thesis: \textit{History of Hobbits}}
 	\cvcze{Studia o Śródziemiu, studia licencjackie, praca: \textit{Historia Hobbitów}}
 	
@@ -62,35 +77,135 @@
 	\cvcze{aiakdasjadnj: \textit{History of Hobbits}}
 \end{cvsection}
 
-\begin{cvsection}{Work Experience}
-	\cvdatedsubsection{ABC Limited.}{2013 -- 2015}
-	\begin{itemize}
-		\item Developed new product
-		\item Improved productivity by 20\%
-		\item Decreased costs by \$10,000
-	\end{itemize}
+%%%% Sections - Work
+\begin{cvsection}{%
+	\cveng{Work Experience}%
+	\cvcze{Pracovní zkušenosti}%
+}
+	\cvdatedsubsection{%
+		\cveng{ABC Limited.}%
+		\cvcze{ABC Limited.}%
+	}{2013 -- 2015}
+	\cveng{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla est. Sed vel lectus.}
+	\cvcze{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla est. Sed vel lectus.}
+	
+	\cvdatedsubsection{%
+		\cveng{DEF Limited.}%
+		\cvcze{DEF Limited.}%
+	}{2015 -- 2019}
+	\cveng{Pellentesque habitant morbi tristique senectus et netus et malesuada.}
+	\cvcze{Pellentesque habitant morbi tristique senectus et netus et malesuada.}
 \end{cvsection}
 
-\begin{cvsection}{Technical Skills}
-	
-	\cvsubsection{Expert}
-	\cvsubsection{Intermediate}
-	
-\end{cvsection}
-
-\begin{cvsection}{Languages}	
+%%%% Sections - Skills
+\begin{cvsection}{%
+	\cveng{Technical Skills}%
+	\cvcze{Technické znalosti}%
+}
+	\cvsubsection{Programming Languages}
 	\begin{cvitemvaluetable}
-		\cvitemvalue{Czech}{Mother Tongue}
-		\cvitemvalue{English}{Fluent}
-		\cvitemvalue{German}{Elementary}
+		\cvitemvalue{C++, C}{%
+			\cveng{Expert, working knowledge.}%
+			\cvcze{Expert, pracovní zkušenost.}%
+		}
+		\cvitemvalue{Python, Java}{%
+			\cveng{Beginner, knowladge from University.}%
+			\cvcze{Začátečník, znalosti z vysoké školy.}%
+		}
+		\cvitemvalue{MATLAB, GNU Octave}{%
+			\cveng{Beginner, knowladge from University.}%
+			\cvcze{Začátečník, znalosti z vysoké školy.}%
+		}
+	\end{cvitemvaluetable}
+
+	\cvsubsection{Software Developement}
+	\begin{cvitemvaluetable}
+		\cvitemvalue{Qt}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+		\cvitemvalue{Git, Subversion}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+		\cvitemvalue{CMake}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+	\end{cvitemvaluetable}
+	
+	\cvsubsection{Operating Systems}
+	\begin{cvitemvaluetable}
+		\cvitemvalue{GNU/Linux}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+		\cvitemvalue{Windows}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+	\end{cvitemvaluetable}
+
+	\cvsubsection{Other}
+	\begin{cvitemvaluetable}
+		\cvitemvalue{LaTex}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+		\cvitemvalue{Arduino}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+		\cvitemvalue{GIMP, Inkscape}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
+	\end{cvitemvaluetable}
+\end{cvsection}
+
+%%%% Sections - Languages
+\begin{cvsection}{%
+	\cveng{Languages}%
+	\cvcze{Jazykové znalosti}%	
+}	
+	\begin{cvitemvaluetable}
+		\cvitemvalue{%
+			\cveng{Czech}%
+			\cvcze{Čeština}%	
+		}{%
+			\cveng{Native}%
+			\cvcze{Mateřský jazyk}%
+		}
+		\cvitemvalue{%
+			\cveng{English}%
+			\cvcze{Angličtina}%
+		}{%
+			\cveng{Level C1 (Fluent)}%
+			\cvcze{Úroveň C1 (Velmi dobrá)}%
+		}
+		\cvitemvalue{%
+			\cveng{German}%
+			\cvcze{Němčina}%
+		}{%
+			\cveng{Level A2 (Beginner)}%
+			\cvcze{Úroveň A2 (Nižší)}%
+		}
 	\end{cvitemvaluetable}	
 \end{cvsection}
 
-\begin{cvsection}{Other Skills}
+%%%% Sections - Other
+\begin{cvsection}{%
+	\cveng{Other Skills}%
+	\cvcze{Ostatní znalosti}%	
+}
 	
 \end{cvsection}
 
-\begin{cvsection}{Hobbies}
+%%%% Sections - Hobbies
+\begin{cvsection}{%
+	\cveng{Hobbies}%
+	\cvcze{Záliby}%	
+}
 	
 \end{cvsection}
 

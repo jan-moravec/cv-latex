@@ -44,7 +44,7 @@
 %%%% Global defines
 \definecolor{cvblue}{RGB}{54, 74, 120}
 \def\cvheaderoffset{0.25in}
-\def\cvvaluekeyoffset{9em}
+\def\cvvaluekeyoffset{12em}
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
 %%%% Contact information
