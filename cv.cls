@@ -187,6 +187,17 @@
 	\subsection[#1]{#1}
 }
 
+%%%% Item - value table
+\newenvironment{cvitemvaluetable}{%
+	\begin{tabular}[t]{@{} p{\cvvaluekeyoffset} l}
+	}{
+	\end{tabular}
+}
+
+\newcommand{\cvitemvalue}[2]{%
+	\textbullet \enskip #1: & #2 \\
+}
+
 %%%% No paragraphs, itemize settings
 \setlength{\parindent}{0em}     
 \setlength{\parskip}{0em}
