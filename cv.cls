@@ -44,7 +44,7 @@
 %%%% Global defines
 \definecolor{cvblue}{RGB}{54, 74, 120}
 \def\cvheaderoffset{0.25in}
-\def\cvvaluekeyoffset{12em}
+\def\cvvaluekeyoffset{10em}
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
 %%%% Contact information
@@ -137,6 +137,13 @@
 	\end{minipage}
 }
 
+\newcommand{\cvresume}[1]{%
+	\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
+		\bigskip
+		\textit{#1}
+	\end{adjustwidth}
+}
+
 %%%% Titles customization
 \newenvironment{cvsection}[1]{%
 	\titleformat{\section}
@@ -175,8 +182,8 @@
 
 \titlespacing{\subsection}
 {0em}
-{0.5em}
-{0.2em}
+{0.6em}
+{0.0em}
 
 %%%% Define dated subsection command
 \newcommand{\cvdatedsubsection}[2]{%
@@ -188,14 +195,15 @@
 }
 
 %%%% Item - value table
-\newenvironment{cvitemvaluetable}{%
-	\begin{tabular}[t]{@{} p{\cvvaluekeyoffset} l}
+\newenvironment{cvitemvaluetable}[1][\cvvaluekeyoffset]{%
+	\begin{tabular}[t]{@{} p{#1} l}
 	}{
 	\end{tabular}
 }
 
 \newcommand{\cvitemvalue}[2]{%
-	\textbullet \enskip #1: & #2 \\
+	%\textbullet \enskip #1: & #2 \\
+	#1: & #2 \\
 }
 
 %%%% No paragraphs, itemize settings

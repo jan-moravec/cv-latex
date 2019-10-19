@@ -4,7 +4,7 @@
 % GitHub: https://github.com/jan-moravec/cv-latex
 
 %%%% Use CV document class
-\documentclass[english]{cv}
+\documentclass[czech]{cv}
 
 %%%% Other packages
 % Download Lato font here: http://www.latofonts.com/lato-free-fonts/
@@ -49,6 +49,11 @@
 
 % Generate the contact section
 \cvgeneratecontact
+
+\cvresume{%
+	\cveng{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam id dolor. Morbi scelerisque luctus velit. Et harum quidem rerum facilis est et expedita distinctio. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.}%
+	\cvcze{Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam id dolor. Morbi scelerisque luctus velit. Et harum quidem rerum facilis est et expedita distinctio. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.}%
+}
 
 %%%% Sections - Education
 \begin{cvsection}{%
@@ -103,7 +108,7 @@
 	\cvcze{Technické znalosti}%
 }
 	\cvsubsection{Programming Languages}
-	\begin{cvitemvaluetable}
+	\begin{cvitemvaluetable}[12em]
 		\cvitemvalue{C++, C}{%
 			\cveng{Expert, working knowledge.}%
 			\cvcze{Expert, pracovní zkušenost.}%
@@ -119,7 +124,7 @@
 	\end{cvitemvaluetable}
 
 	\cvsubsection{Software Developement}
-	\begin{cvitemvaluetable}
+	\begin{cvitemvaluetable}[12em]
 		\cvitemvalue{Qt}{%
 			\cveng{AAA.}%
 			\cvcze{BBB.}%
@@ -132,10 +137,14 @@
 			\cveng{AAA.}%
 			\cvcze{BBB.}%
 		}
+		\cvitemvalue{SQL}{%
+			\cveng{AAA.}%
+			\cvcze{BBB.}%
+		}
 	\end{cvitemvaluetable}
 	
 	\cvsubsection{Operating Systems}
-	\begin{cvitemvaluetable}
+	\begin{cvitemvaluetable}[12em]
 		\cvitemvalue{GNU/Linux}{%
 			\cveng{AAA.}%
 			\cvcze{BBB.}%
@@ -147,7 +156,7 @@
 	\end{cvitemvaluetable}
 
 	\cvsubsection{Other}
-	\begin{cvitemvaluetable}
+	\begin{cvitemvaluetable}[12em]
 		\cvitemvalue{LaTex}{%
 			\cveng{AAA.}%
 			\cvcze{BBB.}%
@@ -168,7 +177,7 @@
 	\cveng{Languages}%
 	\cvcze{Jazykové znalosti}%	
 }	
-	\begin{cvitemvaluetable}
+	\begin{cvitemvaluetable}[5em]
 		\cvitemvalue{%
 			\cveng{Czech}%
 			\cvcze{Čeština}%	
@@ -198,7 +207,8 @@
 	\cveng{Other Skills}%
 	\cvcze{Ostatní znalosti}%	
 }
-	
+	\cveng{Driving license (group B)}%
+	\cvcze{Řidičský průkaz (skupina B)}%	
 \end{cvsection}
 
 %%%% Sections - Hobbies
@@ -206,7 +216,8 @@
 	\cveng{Hobbies}%
 	\cvcze{Záliby}%	
 }
-	
+	\cveng{Technology, programming, embedded (mainly Arduino and Raspberry Pi), culture (books, movies), sports (jogging, hiking).}
+	\cvcze{Nové technologie, programování, embedded (zejména Arduino a Rapberry Pi), kultura (knihy, filmy), sport (běh, horská turistika).}
 \end{cvsection}
 
 \end{document}
