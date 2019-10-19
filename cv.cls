@@ -206,6 +206,19 @@
 	#1: & #2 \\
 }
 
+%%%% Signature command
+\newcommand{\cvsignature}{%
+	\vfill
+	\parbox{\textwidth}{
+		\hfill
+		\parbox{6cm}{
+			\centering
+			\dotfill\\
+			\cvnamevalue, \today
+		}
+	}
+}
+
 %%%% No paragraphs, itemize settings
 \setlength{\parindent}{0em}     
 \setlength{\parskip}{0em}
