@@ -196,7 +196,7 @@
 
 %%%% Item - value table
 \newenvironment{cvitemvaluetable}[1][\cvvaluekeyoffset]{%
-	\begin{tabular}[t]{@{} p{#1} l}
+	\begin{tabular}[t]{@{} p{#1} p{\linewidth-#1}}
 	}{
 	\end{tabular}
 }
