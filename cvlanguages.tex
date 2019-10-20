@@ -1,9 +1,12 @@
 % LaTeX CV languages definitions
 %
+% Add here new languages. See the ADDHERE comments.
+%
 % Author: Jan Moravec (moravecjan@email.cz)
 % GitHub: https://github.com/jan-moravec/cv-latex
 
 %%%% Select one of following languages
+% ADDHERE new language to pass to babel
 \DeclareOption{english}{
 	\PassOptionsToPackage{\CurrentOption}{babel}
 }
@@ -20,26 +23,28 @@
 \ProcessOptions\relax
 
 %%%% Check if language was set
-\newboolean{language_set}   
-\setboolean{language_set}{false}
+% ADDHERE new language to check if language was set
+\newboolean{cvlanguageset}   
+\setboolean{cvlanguageset}{false}
 
 % Check all possible languages here
 \iflanguage{english}{
-	\setboolean{language_set}{true}
+	\setboolean{cvlanguageset}{true}
 }{}
 \iflanguage{czech}{
-	\setboolean{language_set}{true}
+	\setboolean{cvlanguageset}{true}
 
 }{}
 
 % Check result
-\ifthenelse{\boolean{language_set}}{
+\ifthenelse{\boolean{cvlanguageset}}{
 	% OK, language was set
 }{
 	\ClassError{cv}{Language was not set!}{}
 }
 
 %%%% Define language filter command
+% ADDHERE new language filter
 \newcommand{\cveng}[1]{%
 	\iflanguage{english}{#1}{}%
 }

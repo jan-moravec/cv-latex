@@ -1,5 +1,7 @@
 % LaTeX CV template class
 %
+% Edit this to change the look of CV class template.
+%
 % Author: Jan Moravec (moravecjan@email.cz)
 % GitHub: https://github.com/jan-moravec/cv-latex
 
@@ -47,6 +49,23 @@
 \def\cvvaluekeyoffset{10em}
 \newcommand{\ruleafter}[1]{#1~\xrfill[.7ex]{0.25pt}[cvblue]} 
 
+%%%% No paragraphs, itemize settings
+\setlength{\parindent}{0em}     
+\setlength{\parskip}{0em}
+\renewcommand{\baselinestretch}{1.2}
+\setlist[itemize,1]{leftmargin=*}
+\setlist{nolistsep}
+
+%%%% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textcolor{gray}{\today}}
+\lhead{\textcolor{gray}{\cvnamevalue}}
+\rfoot{\thepage \hspace{1pt} / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Contact information
 \newcommand{\cvname}[2][Name]{%
 	\def\cvnamelegend{#1}
@@ -90,16 +109,9 @@
 			\textcolor{cvblue}{\Huge{\cvnamevalue}}
 			\bigskip
 		}
-	
-		%\cvsection{Personal Data}
 		
 		\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
 			\begin{tabular}[t]{@{} p{3mm} p{\cvvaluekeyoffset-7mm} l}
-				%\ifthenelse{\isundefined{\cvnamevalue}}{
-				%	\ClassError{cv}{Set name!}{}
-				%}{
-				%	\faAddressCard 	& \textbf{Name:} 	& \normalsize{\textbf{\cvnamevalue}} \\
-				%}
 				\ifthenelse{\isundefined{\cvphonevalue}}{}{%
 					\faPhone* 		& \cvphonelegend: 		& \cvphonevalue \\
 				}%
@@ -120,23 +132,19 @@
 				}%
 				%\\
 			\end{tabular}
-		%\begin{tabular}[t]{@{} p{\cvvaluekeyoffset} l}
-		%	test: 		& test \\
-		%\end{tabular}
 		\end{adjustwidth}
 	\end{minipage}
 	\begin{minipage}{0.35\textwidth}
 		% Image
 		\ifthenelse{\isundefined{\cvnamevalue}}{}{
-			%\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
 			\begin{flushright}
 				\includegraphics[height=4cm]{\cvimagevalue} %[valign=T, width=3cm, right]
-			\end{flushright}	
-			%\end{adjustwidth}
+			\end{flushright}
 		}
 	\end{minipage}
 }
 
+%%%% Create the resume or motivation text
 \newcommand{\cvresume}[1]{%
 	\begin{adjustwidth}{\cvheaderoffset}{\cvheaderoffset}
 		\bigskip
@@ -145,10 +153,29 @@
 }
 
 %%%% Titles customization
+\titleformat{\subsection}
+[hang]					% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\normalsize}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
+{}						% specify sectioning label.
+{0em}					% is the horizontal separation between label and title body and it must be a length and not be empty.
+{}						% is code preceding the title body.
+[]						% is code following the title body.
+
+\titlespacing{\subsection}
+{0em}					% increases the left margin. 
+{0.6em}					% is the vertical space before the title.
+{0.0em}					% is the separation between title and non-sectioning text. 
+
+\titlespacing{\section}
+{0em}	
+{1.5em}	 
+{0.5em}
+
+%%%% Define section command
 \newenvironment{cvsection}[1]{%
 	\titleformat{\section}
 	[hang]
-	{\Large\scshape\color{cvblue}}
+	{\LARGE\scshape\color{cvblue}}
 	{}
 	{0em}
 	{\ruleafter}
@@ -160,31 +187,6 @@
 	\end{adjustwidth}
 }
 
-\titleformat{\section}
-[hang]										% is sectioning paragraph shape; possible values are: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\Large\scshape\raggedright\bfseries\color{cvblue}}	% is the format to be applied to the title, label, and text; for example \normalfont\Large\bfseries
-{}											% specify sectioning label. \faGraduationCap
-{0em}                        				% is the horizontal separation between label and title body and it must be a length and not be empty. 
-{}                           				% is code preceding the title body. 
-[\titlerule]                 				% is code following the title body. \titlerule
-
-\titlespacing{\section}
-{0em}					% increases the left margin. 
-{1.5em}					% is the vertical space before the title. 
-{0.5em}					% is the separation between title and non-sectioning text. 
-
-\titleformat{\subsection}
-[hang]
-{\bfseries}
-{}
-{0em}
-{}
-
-\titlespacing{\subsection}
-{0em}
-{0.6em}
-{0.0em}
-
 %%%% Define dated subsection command
 \newcommand{\cvdatedsubsection}[2]{%
 	\subsection[#1]{#1 \hfill #2}
@@ -194,7 +196,7 @@
 	\subsection[#1]{#1}
 }
 
-%%%% Item - value table
+%%%% Item-value table and item
 \newenvironment{cvitemvaluetable}[1][\cvvaluekeyoffset]{%
 	\begin{tabular}[t]{@{} p{#1} p{\linewidth-#1}}
 	}{
@@ -218,21 +220,5 @@
 		}
 	}
 }
-
-%%%% No paragraphs, itemize settings
-\setlength{\parindent}{0em}     
-\setlength{\parskip}{0em}
-\renewcommand{\baselinestretch}{1.2}
-\setlist[itemize,1]{leftmargin=*}
-\setlist{nolistsep}
-
-%%%% Header and footer
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{\textcolor{gray}{\today}}
-\lhead{\textcolor{gray}{\cvnamevalue}}
-\rfoot{\thepage \hspace{1pt} / \pageref{LastPage}}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
 
 \endinput
